@@ -56,6 +56,9 @@ def data():
     price = driver.find_elements_by_xpath("//div[@class='_30jeq3 _1_WHN1']")
     images = driver.find_elements_by_xpath("//img[@class='_396cs4 _3exPp9']")
 
+
+
+    print(product)
     for j in product:
         prod.append(j.text)
     for j in price:
@@ -68,6 +71,9 @@ def data():
             d2['product_name']=prod[i]
             d2['product_price']=int((price[i].lstrip("₹")).replace(",",""))
             d2['product_image'] = img[i]
+
+
+            print(d2)
             flipkart.append(d2)
 
 
