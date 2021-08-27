@@ -105,12 +105,12 @@ def data():
     """
 
     driver.get("https://www.google.com/")
-
+    title = driver.title
     driver.close()
 
     # final_list = A+B
     # final_dict = sorted(final_list, key = lambda i: i['product_price'])
-    return driver.title
+    return title
 
 if  __name__ == "__main__":
 	app.run(debug=True)
