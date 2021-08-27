@@ -38,36 +38,38 @@ def data():
     product_name =  request.args['q']
 
 
-    """
+    
     # Flipkart
-    B=[]
-    FlipkartProduct = []
-    FlipkartPrice = []
-    FlipkartImages = []
+    flipkart=[]
+    prod = []
+    price = []
+    img = []
     driver.get("https://www.flipkart.com/") 
-    driver.find_element(By.XPATH,"//button[@class='_2KpZ6l _2doB4z']").click()
-    driver.find_element(By.XPATH,"//input[@title='Search for products, brands and more']").send_keys(product_name)
-    driver.find_element(By.XPATH,"//button[@type='submit']").click()
-    time.sleep(5)
+    driver.find_element_by_xpath("//button[@class='_2KpZ6l _2doB4z']").click()
+    driver.find_element_by_xpath("//input[@title='Search for products, brands and more']").send_keys(product_name)
+    driver.find_element_by_xpath("//button[@type='submit']").click()
+
+
     product = driver.find_elements_by_class_name('_4rR01T')
     price = driver.find_elements_by_xpath("//div[@class='_30jeq3 _1_WHN1']")
     images = driver.find_elements_by_xpath("//img[@class='_396cs4 _3exPp9']")
+
     for j in product:
-        FlipkartProduct.append(j.text)
+        prod.append(j.text)
     for j in price:
-        FlipkartPrice.append(j.text)
+        price.append(j.text)
     for j in images:
-        FlipkartImages.append(j.get_attribute("src"))
-    for i in range(len(FlipkartProduct)):
+        img.append(j.get_attribute("src"))
+    for i in range(len(prod)):
             d2 = {}
             d2['shopping_site']="flipkart"
-            d2['product_name']=FlipkartProduct[i]
-            d2['product_price']=int((FlipkartPrice[i].lstrip("₹")).replace(",",""))
-            d2['product_image'] = FlipkartImages[i]
-            B.append(d2)
+            d2['product_name']=prod[i]
+            d2['product_price']=int((price[i].lstrip("₹")).replace(",",""))
+            d2['product_image'] = img[i]
+            flipkart.append(d2)
 
 
-
+    """
      # amazon
     productlist = []
     pricelist = []
@@ -109,8 +111,8 @@ def data():
     driver.close()
 
     # final_list = A+B
-    # final_dict = sorted(final_list, key = lambda i: i['product_price'])
-    return title
+    final_dict = sorted(flipkart, key = lambda i: i['product_price'])
+    return jsonify(final_dict)
 
 if  __name__ == "__main__":
 	app.run(debug=True)
