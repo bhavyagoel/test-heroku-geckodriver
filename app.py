@@ -37,6 +37,8 @@ def data():
 
     product_name =  request.args['q']
 
+
+    """
     # Flipkart
     B=[]
     FlipkartProduct = []
@@ -99,12 +101,16 @@ def data():
             d['product_image']=imglist[i]
             A.append(d)
     
+    
+    """
+
+    driver.get("https://www.google.com/")
 
     driver.close()
 
-    final_list = A+B
-    final_dict = sorted(final_list, key = lambda i: i['product_price'])
-    return jsonify(final_dict)
+    # final_list = A+B
+    # final_dict = sorted(final_list, key = lambda i: i['product_price'])
+    return driver.title
 
 if  __name__ == "__main__":
 	app.run(debug=True)
