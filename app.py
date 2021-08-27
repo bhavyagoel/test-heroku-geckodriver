@@ -35,6 +35,8 @@ def  load_driver():
 def data():
     driver = load_driver()
 
+    product_name =  request.args['q']
+
     # Flipkart
     B=[]
     FlipkartProduct = []
