@@ -44,10 +44,12 @@ def data():
     prod = []
     price = []
     img = []
+
+    
     driver.get("https://www.flipkart.com/") 
-    driver.find_element_by_xpath("//button[@class='_2KpZ6l _2doB4z']").click()
-    driver.find_element_by_xpath("//input[@title='Search for products, brands and more']").send_keys(product_name)
-    driver.find_element_by_xpath("//button[@type='submit']").click()
+    driver.find_element_by_xpath("/html/body/div/div/div[1]/div[1]/div[2]/div[2]/form/div/div/input").click()
+    driver.find_element_by_xpath("/html/body/div/div/div[1]/div[1]/div[2]/div[2]/form/div/div/input").send_keys(product_name)
+    driver.find_element_by_xpath("/html/body/div/div/div[1]/div[1]/div[2]/div[2]/form/div/button").click()
 
 
     product = driver.find_elements_by_class_name('_4rR01T')
