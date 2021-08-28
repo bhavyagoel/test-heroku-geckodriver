@@ -21,9 +21,13 @@ class FlipkartSpider(scrapy.Spider):
                 "product_image":imgs[i]
             }
 
-        names = response.xpath("//div[@class='s1Q9rs']/text()").getall()
-        prices = response.xpath("//div[@class='_30jeq3 _1_WHN1']/text()").getall()
+        names = response.xpath("//a[@class='s1Q9rs']/text()").getall()
+        prices = response.xpath("//div[@class='_30jeq3']/text()").getall()
         imgs = response.xpath("//img[@class='_396cs4 _3exPp9']/@src").getall()
+        print(names)
+        print(imgs)
+        print(prices)
+        
         for i in range(len(names)):
             yield {
                 "shopping_site":"flipkart", 
