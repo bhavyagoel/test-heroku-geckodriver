@@ -19,7 +19,6 @@ def scheduleFlipkart():
             'scrapy runspider flipkart.py -a category="{}" -o output.jl'.format(product_name), 
             shell=True)
         
-
         # print(e.output)
         data = []
         with open('output.jl') as f:
