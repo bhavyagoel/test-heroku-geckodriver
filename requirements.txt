@@ -1,4 +1,4 @@
-shub
 flask 
 gunicorn 
 msgpack-python
+scrapy
