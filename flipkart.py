@@ -1,6 +1,5 @@
 import scrapy
 
-
 class FlipkartSpider(scrapy.Spider):
     name = 'flipkart'
     allowed_domains = ['flipkart.com']

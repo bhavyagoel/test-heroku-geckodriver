@@ -1,9 +1,8 @@
 import subprocess
-from subprocess import Popen, PIPE, check_output
+from subprocess import check_output
 from flask import Flask, jsonify
 from flask import request
 import json
-
 
 app = Flask(__name__)
 
@@ -12,7 +11,6 @@ def scheduleFlipkart():
     product_name =  request.args['q']
 
     open('output.jl', 'w').close()
-
 
     if product_name:
         p = subprocess.check_output(
@@ -29,9 +27,6 @@ def scheduleFlipkart():
 
 
 if __name__ == "__main__":
-    p = subprocess.check_output("echo -ne '\n' | shub login", shell=True)
-    output = p.decode("utf-8")
-    print(output)
     app.run(debug=True, host='0.0.0.0')
 
 
