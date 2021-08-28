@@ -1,26 +1,38 @@
-import scrapy
-
-class FlipkartScrap(scrapy.Spider):
-    name = "flipkart"
-    
-    start_urls = ['https://www.flipkart.com/search?q={prod}'.format(prod = "google phone")]
-
-    def parse(self, response):
-
-        names = response.xpath("//div[@class='_4rR01T']/text()").getall()
-        prices = response.xpath("//div[@class='_30jeq3 _1_WHN1']/text()").getall()
-        imgs = response.xpath("//img[@class='_396cs4 _3exPp9']/@src").getall()
-        flipkart = []
-        for i in range(len(names)):
-            d2 = {}
-            d2['shopping_site']="flipkart"
-            d2['product_name']=names[i]
-            d2['product_price']=prices[i].replace("\u20b9", "")
-            d2['product_image'] = imgs[i]
-            flipkart.append(d2)
+import subprocess
+from subprocess import Popen, PIPE, check_output
+from flask import Flask, jsonify
+from flask import request
+import json
 
 
-        yield {"flipkart": flipkart}
-        # for next_page in response.css('a.next'):
-        #     yield response.follow(next_page, self.parse)
+app = Flask(__name__)
+
+@app.route('/flipkart', methods = ['GET'])
+def scheduleFlipkart():
+    product_name =  request.args['q']
+
+    open('output.jl', 'w').close()
+
+
+    if product_name:
+        p = subprocess.check_output(
+            "scrapy runspider flipkart.py -a category='{}' -o output.jl".format(product_name), 
+            shell=True)
+        
+
+        # print(e.output)
+        data = []
+        with open('output.jl') as f:
+            for line in f:
+                data.append(json.loads(line))
+        return jsonify(data)
+    return "Querry param not passed"
+
+
+if __name__ == "__main__":
+    p = subprocess.check_output("echo -ne '\n' | shub login", shell=True)
+    output = p.decode("utf-8")
+    print(output)
+    app.run(debug=True, host='0.0.0.0')
+
 

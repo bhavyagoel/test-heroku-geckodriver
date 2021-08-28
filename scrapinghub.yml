@@ -1,6 +1,2 @@
 project: 550552
-
-stacks:
-    default: scrapy:1.7-py3
-requirements:
-  file: requirements.txt
+apikey: 271f13b234bf4f3d8101513c0747b39f

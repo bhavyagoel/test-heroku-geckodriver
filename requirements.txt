@@ -1,3 +1,4 @@
-selenium
+shub
 flask 
 gunicorn 
+msgpack-python
