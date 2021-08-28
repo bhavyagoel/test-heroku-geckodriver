@@ -16,7 +16,7 @@ def scheduleFlipkart():
 
     if product_name:
         p = subprocess.check_output(
-            "scrapy runspider flipkart.py -a category='{}' -o output.jl".format(product_name), 
+            'scrapy runspider flipkart.py -a category="{}" -o output.jl'.format(product_name), 
             shell=True)
         
 
